@@ -8,9 +8,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/customer")
 public class CustomerController {
 
-    public String save(CustomerDto dto){}
-    public String find(String id){}
-    public String updateCustomer(CustomerDto dto,String id){}
-    public String deleteCustomer(String id){}
-    public String findAllCustomer(){}
+    public String save(CustomerDto dto){
+        return dto.toString();
+    }
+    public String find(String id){
+        return id+" - Customer";
+    }
+    public String updateCustomer(CustomerDto dto,String id){
+        return dto.toString()+" "+id+" -Updated";
+    }
+    public String deleteCustomer(String id){
+        return id+ "-Deleted";
+    }
+    public String findAllCustomer(){
+        return "All Customers";
+    }
 }
