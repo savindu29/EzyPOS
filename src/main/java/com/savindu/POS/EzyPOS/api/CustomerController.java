@@ -1,15 +1,16 @@
 package com.savindu.POS.EzyPOS.api;
 
-import org.springframework.stereotype.Controller;
+import com.savindu.POS.EzyPOS.dto.request.CustomerDto;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @RequestMapping("/api/v1/customer")
 public class CustomerController {
 
-    public String save(Customer dto){}
+    public String save(CustomerDto dto){}
     public String find(String id){}
-    public String updateCustomer(Customer dto,String id){}
+    public String updateCustomer(CustomerDto dto,String id){}
     public String deleteCustomer(String id){}
     public String findAllCustomer(){}
 }
