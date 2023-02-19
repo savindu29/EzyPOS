@@ -4,4 +4,4 @@ Simple CRUD operation using Spring-boot and Maven for the Grocery shop managemen
 
 Data Flow
 
-![Screenshot (582)](https://user-images.githubusercontent.com/86566770/219946894-8a5a0b72-7530-4552-99ea-c6cb0793bb90.png)
+![Screenshot (584)](https://user-images.githubusercontent.com/86566770/219949467-1c7f9703-e0ae-44d3-b999-32d18189d72b.png)

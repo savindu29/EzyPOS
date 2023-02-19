@@ -2,15 +2,16 @@ package com.savindu.POS.EzyPOS.api;
 
 import com.savindu.POS.EzyPOS.dto.request.CustomerDto;
 import com.savindu.POS.EzyPOS.service.CustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/customer")
 public class CustomerController {
-
+    @Autowired
     private CustomerService customerService;
 
     @PostMapping("/create") // localhost:8000/api/v1/customer/create (POST)
-    public String save(@PathVariable CustomerDto dto){
+    public String save(@RequestBody CustomerDto dto){
         return customerService.saveCustomer(dto);
     }
     @GetMapping("/{id}") // localhost:8000/api/v1/customer/15 (GET)
