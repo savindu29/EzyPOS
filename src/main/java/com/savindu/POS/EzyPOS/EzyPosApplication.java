@@ -10,6 +10,7 @@ public class EzyPosApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(EzyPosApplication.class, args);
+
 	}
 
 }

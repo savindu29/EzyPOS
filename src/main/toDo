@@ -1,0 +1,7 @@
+model Mapper
+mapstruct
+exception handling
+standard response entities
+custom queries
+transaction
+
