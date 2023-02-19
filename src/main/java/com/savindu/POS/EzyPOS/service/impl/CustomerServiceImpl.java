@@ -4,9 +4,12 @@ import com.savindu.POS.EzyPOS.dto.request.CustomerDto;
 import com.savindu.POS.EzyPOS.entity.Customer;
 import com.savindu.POS.EzyPOS.repo.CustomerRepo;
 import com.savindu.POS.EzyPOS.service.CustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CustomerServiceImpl implements CustomerService {
-
+    @Autowired
     private CustomerRepo customerRepo;
     @Override
     public String saveCustomer(CustomerDto dto) {
