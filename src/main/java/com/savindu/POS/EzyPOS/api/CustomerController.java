@@ -1,14 +1,17 @@
 package com.savindu.POS.EzyPOS.api;
 
 import com.savindu.POS.EzyPOS.dto.request.CustomerDto;
+import com.savindu.POS.EzyPOS.service.CustomerService;
 import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/customer")
 public class CustomerController {
 
+    private CustomerService customerService;
+
     @PostMapping("/create") // localhost:8000/api/v1/customer/create (POST)
     public String save(@PathVariable CustomerDto dto){
-        return dto.toString();
+        return customerService.saveCustomer(dto);
     }
     @GetMapping("/{id}") // localhost:8000/api/v1/customer/15 (GET)
     public String find(@PathVariable String id){
@@ -22,7 +25,7 @@ public class CustomerController {
 
     @DeleteMapping("/remove/{id}") // localhost:8000/api/v1/customer/remove/15 (DELETE)
     public String deleteCustomer(@PathVariable String id){
-        return id+ "-Deleted";
+        return id+ "- Deleted";
     }
 
     @GetMapping("/list") // localhost:8000/api/v1/customer/list (GET)
