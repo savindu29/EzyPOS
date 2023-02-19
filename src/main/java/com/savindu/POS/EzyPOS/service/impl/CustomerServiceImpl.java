@@ -17,7 +17,7 @@ public class CustomerServiceImpl implements CustomerService {
                 "D001",dto.getName(), dto.getAddress(), dto.getSalary()
         );
         customerRepo.save(c1);
-        return null;
+        return c1.getId()+" - Saved";
     }
 
     @Override
