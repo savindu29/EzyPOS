@@ -26,7 +26,7 @@ public class CustomerServiceImpl implements CustomerService {
                 idGenerator.generateId(10),dto.getName(), dto.getAddress(), dto.getSalary()
         );
         customerRepo.save(c1);
-        return c1.getId()+"- Saved!";
+        return c1.getId()+" Saved!";
     }
 
     @Override
