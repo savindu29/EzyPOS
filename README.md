@@ -1,10 +1,10 @@
 <body>
 <h2>Simple CRUD operation using Spring-boot and Maven for the Grocery shop management system</h2>
 <hr/>
-<p>( Only for the customer entity )</p>
+<p>( Only for the customer )</p>
 <p>I created this small system to understand the concepts while learning Spring Boot.
 Crud operations are contained here.</p>
-
+http://localhost:8000/swagger-ui.html
 <h3>Simple Data Flow Diagram</h3> 
 
 <div style="margin-left: 30px; width: 600px">
