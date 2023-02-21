@@ -75,7 +75,7 @@ public class CustomerController {
                 new StandardResponse(
                         200 ,
                        "Data list",
-                        null
+                        customerService.findAllCustomer()
 
                 ), HttpStatus.OK
         );

@@ -30,14 +30,17 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public String findCustomer(String id) {
+    public CustomerResponseDto findCustomer(String id) {
         Optional<Customer> selectedCustomer = customerRepo.findById(id);
-        if(selectedCustomer.isPresent()){
-            return selectedCustomer.get().toString();
-        }
-        return null;
+//        if(selectedCustomer.isPresent()){
+//            return selectedCustomer.get();
+//        }
+//        return null;
         // java 11+
-//        return customerRepo.findById(id).orElse(null).toString();
+        Customer c = customerRepo.findById(id).orElse(null);
+        return new CustomerResponseDto(
+                c.getId(),c.getName(),c.getAddress(),c.getSalary()
+        );
     }
 
     @Override
