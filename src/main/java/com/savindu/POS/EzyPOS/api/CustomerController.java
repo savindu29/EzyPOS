@@ -18,11 +18,7 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    @PostMapping(
-            value="/create",
-            consumes = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE},
-            produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE}
-    ) // localhost:8000/api/v1/customer/create (POST)
+    @PostMapping(value="/create" ) // localhost:8000/api/v1/customer/create (POST)
     public ResponseEntity<StandardResponse> save(@RequestBody CustomerDto dto){
         return new ResponseEntity<>(
                 new StandardResponse(
@@ -34,7 +30,7 @@ public class CustomerController {
         );
     }
     @GetMapping("/{id}") // localhost:8000/api/v1/customer/15 (GET)
-    public ResponseEntity<StandardResponse> find(@PathVariable String id){
+    public ResponseEntity<StandardResponse> find(@PathVariable String id) throws ClassNotFoundException {
         return new ResponseEntity<>(
                 new StandardResponse(
                         200 ,
