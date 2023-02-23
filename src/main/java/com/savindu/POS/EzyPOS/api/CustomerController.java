@@ -67,14 +67,11 @@ public class CustomerController {
             @RequestParam int page,
             @RequestParam int size
     ){
-
-
-
         return new ResponseEntity<>(
                 new StandardResponse(
                         200 ,
                        "Data list",
-                        customerService.findAllCustomer()
+                        customerService.findAllCustomer(searchText,page,size)
 
                 ), HttpStatus.OK
         );

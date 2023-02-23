@@ -10,10 +10,11 @@ import com.savindu.POS.EzyPOS.service.CustomerService;
 import com.savindu.POS.EzyPOS.util.IdGenerator;
 import com.savindu.POS.EzyPOS.util.mapper.CustomerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import java.awt.print.Pageable;
 import java.util.Optional;
 
 @Service
@@ -22,7 +23,6 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerRepo customerRepo;
     @Autowired
     private IdGenerator idGenerator;
-
     @Autowired
     private CustomerMapper customerMapper;
     @Override
@@ -65,12 +65,16 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public PaginatedCustomerResponseDto findAllCustomer(
-            String searchText,int page, int size
-
+            String searchText, int page, int size
     ) {
-        //create method custom query =? (find data)
-        //create method custom query =(count)
-        return customerMapper.toCustomerResponseDtoList(customerRepo.findAll());
 
+        // create method with a custom query=? (find data)
+        // create method with a custom query=? (count)
+        return new PaginatedCustomerResponseDto(
+                customerRepo.countCustomer(searchText),
+                customerMapper.toCustomerResponseDtoList(customerRepo.searchCustomer(
+                        searchText,  PageRequest.of(page, size)
+                ))
+        );
     }
 }
