@@ -1,6 +1,6 @@
 package com.savindu.POS.EzyPOS.service.impl;
 
-import com.savindu.POS.EzyPOS.dto.request.CustomerDto;
+import com.savindu.POS.EzyPOS.dto.request.CustomerRequestDto;
 import com.savindu.POS.EzyPOS.dto.response.CustomerResponseDto;
 import com.savindu.POS.EzyPOS.entity.Customer;
 import com.savindu.POS.EzyPOS.repo.CustomerRepo;
@@ -9,7 +9,6 @@ import com.savindu.POS.EzyPOS.util.IdGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +20,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private IdGenerator idGenerator;
     @Override
-    public String saveCustomer(CustomerDto dto) {
+    public String saveCustomer(CustomerRequestDto dto) {
         Customer c1 = new Customer(
                 idGenerator.generateId(10),dto.getName(), dto.getAddress(), dto.getSalary()
         );
@@ -47,7 +46,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public String updateCustomer(CustomerDto dto, String id) {
+    public String updateCustomer(CustomerRequestDto dto, String id) {
         Customer c = customerRepo.findById(id).orElse(null);
         if (null==c) return "Not Found";
         c.setName(dto.getName());

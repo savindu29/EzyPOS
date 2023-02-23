@@ -1,16 +1,12 @@
 package com.savindu.POS.EzyPOS.api;
 
-import com.savindu.POS.EzyPOS.dto.request.CustomerDto;
-import com.savindu.POS.EzyPOS.dto.response.CustomerResponseDto;
+import com.savindu.POS.EzyPOS.dto.request.CustomerRequestDto;
 import com.savindu.POS.EzyPOS.service.CustomerService;
 import com.savindu.POS.EzyPOS.util.StandardResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/customer")
@@ -19,7 +15,7 @@ public class CustomerController {
     private CustomerService customerService;
 
     @PostMapping(value="/create" ) // localhost:8000/api/v1/customer/create (POST)
-    public ResponseEntity<StandardResponse> save(@RequestBody CustomerDto dto){
+    public ResponseEntity<StandardResponse> save(@RequestBody CustomerRequestDto dto){
         return new ResponseEntity<>(
                 new StandardResponse(
                         201 ,
@@ -42,7 +38,7 @@ public class CustomerController {
     }
 
     @PutMapping(value = "/modify",params = {"id"}) // localhost:8000/api/v1/customer/modify?id=15 (PUT)
-    public ResponseEntity<StandardResponse> updateCustomer(@RequestBody CustomerDto dto,@RequestParam String id){
+    public ResponseEntity<StandardResponse> updateCustomer(@RequestBody CustomerRequestDto dto, @RequestParam String id){
         return new ResponseEntity<>(
                 new StandardResponse(
                         201 ,
