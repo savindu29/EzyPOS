@@ -3,6 +3,7 @@ package com.savindu.POS.EzyPOS.service.impl;
 import com.savindu.POS.EzyPOS.dto.CustomerDto;
 import com.savindu.POS.EzyPOS.dto.request.CustomerRequestDto;
 import com.savindu.POS.EzyPOS.dto.response.CustomerResponseDto;
+import com.savindu.POS.EzyPOS.dto.response.paginate.PaginatedCustomerResponseDto;
 import com.savindu.POS.EzyPOS.entity.Customer;
 import com.savindu.POS.EzyPOS.repo.CustomerRepo;
 import com.savindu.POS.EzyPOS.service.CustomerService;
@@ -63,7 +64,12 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<CustomerResponseDto> findAllCustomer() {
+    public PaginatedCustomerResponseDto findAllCustomer(
+            String searchText,int page, int size
+
+    ) {
+        //create method custom query =? (find data)
+        //create method custom query =(count)
         return customerMapper.toCustomerResponseDtoList(customerRepo.findAll());
 
     }

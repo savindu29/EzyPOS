@@ -60,9 +60,16 @@ public class CustomerController {
                 ), HttpStatus.NO_CONTENT
         );
     }
+    // api/v1/customer/list?searchText=sd&page=1&size=10
+    @GetMapping(value = "/list", params = {"searchText","page","size"}) // localhost:8000/api/v1/customer/list (GET)
+    public ResponseEntity<StandardResponse> findAllCustomer(
+            @RequestParam String searchText,
+            @RequestParam int page,
+            @RequestParam int size
+    ){
 
-    @GetMapping("/list") // localhost:8000/api/v1/customer/list (GET)
-    public ResponseEntity<StandardResponse> findAllCustomer(){
+
+
         return new ResponseEntity<>(
                 new StandardResponse(
                         200 ,
