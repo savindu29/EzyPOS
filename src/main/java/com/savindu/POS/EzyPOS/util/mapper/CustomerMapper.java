@@ -1,5 +1,6 @@
 package com.savindu.POS.EzyPOS.util.mapper;
 
+import com.savindu.POS.EzyPOS.dto.CustomerDto;
 import com.savindu.POS.EzyPOS.dto.request.CustomerRequestDto;
 import com.savindu.POS.EzyPOS.dto.response.CustomerResponseDto;
 import com.savindu.POS.EzyPOS.entity.Customer;
@@ -9,7 +10,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface CustomerMapper {
-    Customer toCustomer(CustomerRequestDto dto);
+    Customer toCustomer(CustomerDto dto);
     CustomerResponseDto toCustomerResponseDto(Customer customer);
-    List<CustomerResponseDto> toCustomerResponseDto(List<Customer> list );
+    List<CustomerResponseDto> toCustomerResponseDtoList(List<Customer> list );
 }

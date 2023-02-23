@@ -1,11 +1,13 @@
 package com.savindu.POS.EzyPOS.service.impl;
 
+import com.savindu.POS.EzyPOS.dto.CustomerDto;
 import com.savindu.POS.EzyPOS.dto.request.CustomerRequestDto;
 import com.savindu.POS.EzyPOS.dto.response.CustomerResponseDto;
 import com.savindu.POS.EzyPOS.entity.Customer;
 import com.savindu.POS.EzyPOS.repo.CustomerRepo;
 import com.savindu.POS.EzyPOS.service.CustomerService;
 import com.savindu.POS.EzyPOS.util.IdGenerator;
+import com.savindu.POS.EzyPOS.util.mapper.CustomerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,41 +21,39 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerRepo customerRepo;
     @Autowired
     private IdGenerator idGenerator;
+
+    @Autowired
+    private CustomerMapper customerMapper;
     @Override
     public String saveCustomer(CustomerRequestDto dto) {
-        Customer c1 = new Customer(
-                idGenerator.generateId(10),dto.getName(), dto.getAddress(), dto.getSalary()
-        );
-        customerRepo.save(c1);
-        return c1.getId()+" Saved!";
+        CustomerDto cDto  = new CustomerDto( idGenerator.generateId(10),dto.getName(), dto.getAddress(), dto.getSalary());
+
+        return customerRepo.save(customerMapper.toCustomer(cDto)).getId()+" Saved!";
+
     }
 
     @Override
     public CustomerResponseDto findCustomer(String id) throws ClassNotFoundException {
+
         Optional<Customer> selectedCustomer = customerRepo.findById(id);
-//        if(selectedCustomer.isPresent()){
-//            return selectedCustomer.get();
-//        }
-//        return null;
-        // java 11+
-        Customer c = customerRepo.findById(id).orElse(null);
-        if(c==null){
-            throw new ClassNotFoundException("Not Found");
+        if(selectedCustomer.isPresent()){
+            return customerMapper.toCustomerResponseDto(selectedCustomer.get());
         }
-        return new CustomerResponseDto(
-                c.getId(),c.getName(),c.getAddress(),c.getSalary()
-        );
+        throw new ClassNotFoundException("Not Found");
+
     }
 
     @Override
-    public String updateCustomer(CustomerRequestDto dto, String id) {
-        Customer c = customerRepo.findById(id).orElse(null);
-        if (null==c) return "Not Found";
-        c.setName(dto.getName());
-        c.setAddress(dto.getAddress());
-        c.setSalary(dto.getSalary());
-        customerRepo.save(c);
-        return c.getName()+" was Updated!";
+    public String updateCustomer(CustomerRequestDto dto, String id) throws ClassNotFoundException {
+        Optional<Customer> customer = customerRepo.findById(id);
+        if (customer.isPresent()){
+            customer.get().setName(dto.getName());
+            customer.get().setAddress(dto.getAddress());
+            customer.get().setSalary(dto.getSalary());
+            customerRepo.save(customer.get());
+            return customer.get().getName()+" was Saved";
+        }
+        throw new ClassNotFoundException("Not Found");
     }
 
     @Override
@@ -64,17 +64,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<CustomerResponseDto> findAllCustomer() {
-        List<CustomerResponseDto> responseDtoList = new ArrayList<>();
-        List<Customer> all = customerRepo.findAll();
-        for (Customer c:all) {
-            responseDtoList.add(new CustomerResponseDto(
-                    c.getId(),
-                    c.getAddress(),
-                    c.getName(),
-                    c.getSalary()
-            ));
-        }
-        return responseDtoList;
+        return customerMapper.toCustomerResponseDtoList(customerRepo.findAll());
 
     }
 }
